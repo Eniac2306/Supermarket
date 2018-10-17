@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>index_2</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <link href="jquery-ui-themes.css" type="text/css" rel="stylesheet"/>
+    <link href="styles.css" type="text/css" rel="stylesheet"/>
+    <link href="index/styles_2.css" type="text/css" rel="stylesheet"/>
+    <script src="scripts/jquery-1.7.1.min.js"></script>
+    <script src="scripts/jquery-ui-1.8.10.custom.min.js"></script>
+    <script src="scripts/prototypePre.js"></script>
+    <script src="document.js"></script>
+    <script src="scripts/prototypePost.js"></script>
+    <script src="index/data.js"></script>
+    <script src="js/tracking-min.js"></script>
+    <script src="js/face-min.js"></script>
+    <script src="js/eye-min.js"></script>
+    <script src="js/mouth-min.js"></script>
+    <script type="text/javascript"></script>
+      <style>
+          video,#canvas,#shortCut{
+              position: absolute;
+              width: 581px;
+              height: 436px;
+              margin-left: -290px;
+          }
+          #btn,#keepimg {
+              width: 80px;
+              height: 60px;
+              display: inline-block;
+              background-color: #169BD5;
+          }
+      </style>
+  </head>
+          
+  <body>
+    <div id="u0" class="" data-left="33" data-top="22" data-width="1768" data-height="908">
+        <!-- 外背框 (矩形) -->
+        <div id="box_1" class="ax_default box_1">
+            <div id="sys_name_div" class="ax_default label">
+                <div id="sys_name" class="text">
+                    <p><span>杉德无人超市自助结账系统</span></p>
+                </div>
+            </div>
+
+            <div id="store_name_div" class="ax_default label">
+                <div id="store_name" class="text">
+                    <p><span>南京紫东创意园店</span></p>
+                </div>
+            </div>
+
+            <div id="time_div" class="ax_default label">
+                <!--setInterval实时显示时间-->
+                <p id="time" style="color: black;"></p>
+                <script>
+                    function mytime(){
+                        var a = new Date();
+                        var b = a.toLocaleTimeString();
+                        var c = a.toLocaleDateString();
+                        document.getElementById("time").innerHTML = c+"&nbsp"+b;
+                    }
+                    setInterval(function() {mytime()},1000);
+                </script>
+            </div>
+
+            <div id="commodity_box" class="ax_default box_1">
+                <div id="commodity_box_title_div" class="ax_default _一级标题">
+                    <div id="commodity_box_title" class="text">
+                        <p><span>购物车</span></p>
+                    </div>
+                </div>
+                <div id="commodity" class="box_1" style="display:none; visibility: hidden">
+
+                </div>
+            </div>
+
+            <div id="face_box" class="ax_default box_1">
+                <div id="face_title_div" class="ax_default _一级标题">
+                    <div id="face_title" class="text">
+                        <p><span>人脸识别</span></p>
+                    </div>
+                </div>
+                <div id="face_video">
+                    <video id="video" preload autoplay loop muted></video>
+                    <canvas id="canvas" width="581" height="436"></canvas>
+                    <canvas id="shortCut" width="581" height="436"></canvas>
+                </div>
+                <input id="btn" type="button" value="拍照" onclick="getPhoto()" />
+                <!--<a style="position: absolute; left: 0;" target="_blank" href="" id="saveTest">saveTest</a>-->
+                <input id="keepimg" type="button" value="识别"  />
+            </div>
+
+            <div id="information_box" class="ax_default box_1">
+                <div id="information_title" class="ax_default _一级标题">
+                    <p><span>会员信息</span></p>
+                </div>
+
+            </div>
+        </div>
+        <form action="/getImg" method="post" id="test_form">
+        <input type=hidden id="imgData" name="imgData" value="">
+    </form>
+    </div>
+    <script type="text/javascript">
+        var saveArray = {};
+        var video = document.getElementById('video');
+        var faceLine = document.getElementById('canvas');
+        var context = faceLine.getContext('2d');
+        var shortcut = document.getElementById('shortCut');
+        var context2 = shortcut.getContext('2d');
+
+        window.onload = function () {
+            var tracker = new tracking.ObjectTracker('face');
+            tracker.setInitialScale(4);
+            tracker.setStepSize(2);
+            tracker.setEdgesDensity(0.1);
+
+            tracking.track('#video', tracker, {camera: true});
+
+            tracker.on('track', function (event) {
+                context.clearRect(0, 0, faceLine.width, faceLine.height);
+
+                event.data.forEach(function (rect) {
+                    context.strokeStyle = '#bfaeff';
+                    context.strokeRect(rect.x, rect.y, rect.width, rect.height);
+                    context.font = '11px Helvetica';
+                    context.fillStyle = "#ff918b";
+                    context.fillText('x: ' + rect.x + 'px', rect.x + rect.width + 5, rect.y + 11);
+                    context.fillText('y: ' + rect.y + 'px', rect.x + rect.width + 5, rect.y + 22);
+                    console.log(rect.x, rect.width, rect.y, rect.height);
+                    saveArray.x = rect.x;
+                    saveArray.y = rect.y;
+                    saveArray.width = rect.width;
+                    saveArray.height = rect.height;
+                });
+            });
+        }
+
+        function getPhoto() {
+            context2.drawImage(video, 0, 0, 581, 436); //将video对象内指定的区域捕捉绘制到画布上指定的区域，实现拍照。
+            //var img = convertCanvasToImage(video);
+            Download();
+        }
+        var saveTest = document.getElementById('saveTest')
+        saveTest.addEventListener('click', function (ev) {
+            saveTest.href = document.getElementById("shortCut").toDataURL()
+            // saveTest.download = 'a.png'
+        }, false)
+
+        function Download() {
+            //cavas 保存图片到本地  js 实现
+            //------------------------------------------------------------------------
+            //1.确定图片的类型  获取到的图片格式 data:image/Png;base64,......
+            var type = 'jpg';
+            var d = document.getElementById("shortCut");
+            var imgdata = d.toDataURL(type);
+            var imgDataInput = document.getElementById("imgData");
+            imgDataInput.value = imgdata;
+            //alert(imgDataInput.value);
+            var form = document.getElementById("test_form");
+            form.submit();
+        }
+
+    </script>
+  </body>
+</html>
