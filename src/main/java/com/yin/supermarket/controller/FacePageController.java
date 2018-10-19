@@ -6,11 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
-import sun.misc.BASE64Decoder;
 
-import java.io.FileOutputStream;
-import java.io.OutputStream;
 import java.util.Date;
 
 @Controller
@@ -36,12 +32,12 @@ public class FacePageController {
         String imgTime = String.valueOf(Time);
 
         String[] split = imgData.split(",", 2);
-        System.out.println(split.length);
+//        System.out.println(split.length);
         String imgFilePath = "D:\\supermarket\\" + imgTime + ".jpg";
         if (!facePageService.GenerateImage(split[1], imgFilePath)) {
             throw new Exception("出错啦");
         }
-        String userInfo = facePageService.GetInfo(imgTime);
+        String userInfo = facePageService.getVector(imgTime);
         if (userInfo == null) {
             userInfo = "查无此人";
         }
