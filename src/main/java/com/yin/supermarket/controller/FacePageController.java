@@ -32,12 +32,11 @@ public class FacePageController {
         String imgTime = String.valueOf(Time);
 
         String[] split = imgData.split(",", 2);
-//        System.out.println(split.length);
         String imgFilePath = "D:\\supermarket\\" + imgTime + ".jpg";
         if (!facePageService.GenerateImage(split[1], imgFilePath)) {
             throw new Exception("出错啦");
         }
-        String userInfo = facePageService.getVector(imgTime);
+        String userInfo = facePageService.GetInfo(imgTime+".jpg");
         if (userInfo == null) {
             userInfo = "查无此人";
         }
