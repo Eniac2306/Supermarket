@@ -1,22 +1,23 @@
 package com.yin.supermarket.service;
 
-import com.alibaba.fastjson.JSON;
+import com.yin.supermarket.dao.IUserRepository;
+import com.yin.supermarket.entity.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import sun.misc.BASE64Decoder;
 
 import java.io.FileOutputStream;
 import java.io.OutputStream;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Vector;
-import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
 
 @Service
 public class FacePageService {
+
+    @Autowired IUserRepository userRepository;
     /**
      * 对字节数组字符串进行Base64解码并生成图片
      */
@@ -41,6 +42,11 @@ public class FacePageService {
         } catch (Exception e) {
             return false;
         }
+    }
+
+    public void getInfo(List<Double> list){
+        userRepository.save(new User());
+        userRepository.findByUserName("尹泽然");
     }
 
 

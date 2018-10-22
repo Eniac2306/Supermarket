@@ -1,6 +1,6 @@
-package com.yin.supermarket.Entity;
+package com.yin.supermarket.entity;
 
-//import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Id;
 
 public class User {
     private Long id;
@@ -8,6 +8,7 @@ public class User {
     private Integer age;
     private boolean sex;
 
+    @Id
     public Long getId() {
         return id;
     }
