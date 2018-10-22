@@ -1,9 +1,10 @@
 package com.yin.supermarket.service;
 
-import com.yin.supermarket.dao.IUserRepository;
-import com.yin.supermarket.entity.User;
+import com.yin.supermarket.dao.IFaceRepository;
+import com.yin.supermarket.entity.Face;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestTemplate;
 import sun.misc.BASE64Decoder;
 
@@ -17,7 +18,9 @@ import static java.util.stream.Collectors.toList;
 @Service
 public class FacePageService {
 
-    @Autowired IUserRepository userRepository;
+    @Autowired
+    IFaceRepository faceRepository;
+
     /**
      * 对字节数组字符串进行Base64解码并生成图片
      */
@@ -44,29 +47,39 @@ public class FacePageService {
         }
     }
 
-    public void getInfo(List<Double> list){
-        userRepository.save(new User());
-        userRepository.findByUserName("尹泽然");
-    }
-
-
     /**
      * 获取Python服务返回的向量
      */
 
-    public String getVector(String imgTime) {
+    public String getInfo(String imgTime) throws HttpServerErrorException {
         String url = "http://127.0.0.1:5000/{1}";
         RestTemplate restTemplate = new RestTemplate();
         String result = restTemplate.getForObject(url, String.class, imgTime); //url,返回类型，url{imgTime}
         String[] substring = result.substring(2, result.length() - 2).split(", ");
-        List<Double> list = Arrays.stream(substring).map(Double::valueOf).collect(toList());
+        List<Double> getfeatures = Arrays.stream(substring).map(Double::valueOf).collect(toList());
 
-
-        return identify(list);
+        return identify(getfeatures);
     }
 
-    private String identify(List<Double> list) {
-        return null;
+    private String identify(List<Double> getfeatures) {
+        List<Face> features = faceRepository.findAll();
+        double min = 1;
+        String name = null;
+        for (Face face : features) {
+            String[] feature = face.getFeature().split(", ");
+            List<Double> savedfeatures = Arrays.stream(feature).map(Double::valueOf).collect(toList());
+            double temp = 0;
+            for (int i = 0; i < savedfeatures.size(); i++) {
+                double v = savedfeatures.get(i) - getfeatures.get(i);
+                temp += v * v;
+            }
+            temp = Math.sqrt(temp);
+            if (temp < 0.9 && temp < min) {
+                min = temp;
+                name = face.getName();
+            }
+            System.out.println(temp);
+        }
+        return name;
     }
-
 }

@@ -1,7 +1,5 @@
 package com.yin.supermarket.controller;
 
-import com.yin.supermarket.dao.IUserRepository;
-import com.yin.supermarket.entity.User;
 import com.yin.supermarket.service.FacePageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,7 +8,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.Date;
-import java.util.Optional;
 
 @Controller
 public class FacePageController {
@@ -22,14 +19,8 @@ public class FacePageController {
     @Autowired
     FacePageService facePageService;
 
-    @Autowired
-    IUserRepository userRepository;
-
-
     @RequestMapping("/")
     public String facePage() {
-//        Optional user = userRepository.findById("尹泽然");
-//        System.out.println(user);
         return "system/facePage";
     }
 
@@ -44,13 +35,16 @@ public class FacePageController {
         if (!facePageService.GenerateImage(split[1], imgFilePath)) {
             throw new Exception("出错啦");
         }
-        String userInfo = facePageService.GetInfo(imgTime+".jpg");
-        if (userInfo == null) {
-            userInfo = "查无此人";
+        try {
+            String userInfo = facePageService.getInfo(imgTime);
+            if (userInfo == null) {
+                userInfo = "查无此人";
+            }
+            model.addAttribute("vip", userInfo); //model传了一个键值对交给前台接收
+            return "system/facePage";
+        } catch (Exception e) {
+            System.out.println(e.toString());
+            return "system/facePage";
         }
-        model.addAttribute("vip", userInfo); //model传了一个键值对交给前台接收
-        return "system/facePage";
     }
-
-
 }
