@@ -1,6 +1,5 @@
 package com.yin.supermarket.service;
 
-import com.alibaba.fastjson.JSON;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import sun.misc.BASE64Decoder;

@@ -20,86 +20,165 @@
     <script src="js/mouth-min.js"></script>
     <script type="text/javascript"></script>
       <style>
-          video,#canvas,#shortCut{
+          /*video,#canvas,#shortCut{*/
+              /*position: absolute;*/
+              /*width: 581px;*/
+              /*height: 436px;*/
+              /*margin-left: -290px;*/
+          /*}*/
+          /*#btn,#keepimg {*/
+              /*width: 80px;*/
+              /*height: 60px;*/
+              /*display: inline-block;*/
+              /*background-color: #169BD5;*/
+          /*}*/
+          canvas {
               position: absolute;
-              width: 581px;
-              height: 436px;
-              margin-left: -290px;
+              left: 0;
+              top: 0;
+              /*width: 100%;*/
           }
-          #btn,#keepimg {
-              width: 80px;
-              height: 60px;
-              display: inline-block;
-              background-color: #169BD5;
+          video {
+              width:581px;
+              height:436px;
+              background-color:rgba(255, 255, 255, 1);
+          }
+          .text-center {
+              text-align: center;
+          }
+
+          #face_video {
+              padding-top: 30px;
+              width: 581px;
+              margin: 0 auto;
+              position: relative;
           }
       </style>
+      <link rel="stylesheet" href="css/bootstrap.css">
   </head>
           
   <body>
-    <div id="u0" class="" data-left="33" data-top="22" data-width="1768" data-height="908">
-        <!-- 外背框 (矩形) -->
-        <div id="box_1" class="ax_default box_1">
-            <div id="sys_name_div" class="ax_default label">
-                <div id="sys_name" class="text">
-                    <p><span>杉德无人超市自助结账系统</span></p>
-                </div>
-            </div>
-
-            <div id="store_name_div" class="ax_default label">
-                <div id="store_name" class="text">
-                    <p><span>南京紫东创意园店</span></p>
-                </div>
-            </div>
-
-            <div id="time_div" class="ax_default label">
-                <!--setInterval实时显示时间-->
-                <p id="time" style="color: black;"></p>
-                <script>
-                    function mytime(){
-                        var a = new Date();
-                        var b = a.toLocaleTimeString();
-                        var c = a.toLocaleDateString();
-                        document.getElementById("time").innerHTML = c+"&nbsp"+b;
-                    }
-                    setInterval(function() {mytime()},1000);
-                </script>
-            </div>
-
-            <div id="commodity_box" class="ax_default box_1">
-                <div id="commodity_box_title_div" class="ax_default _一级标题">
-                    <div id="commodity_box_title" class="text">
-                        <p><span>购物车</span></p>
-                    </div>
-                </div>
-                <div id="commodity" class="box_1" style="display:none; visibility: hidden">
-
-                </div>
-            </div>
-
-            <div id="face_box" class="ax_default box_1">
-                <div id="face_title_div" class="ax_default _一级标题">
-                    <div id="face_title" class="text">
-                        <p><span>人脸识别</span></p>
-                    </div>
-                </div>
-                <div id="face_video">
-                    <video id="video" preload autoplay loop muted></video>
-                    <canvas id="canvas" width="581" height="436"></canvas>
-                    <canvas id="shortCut" width="581" height="436"></canvas>
-                </div>
-                <input id="btn" type="button" value="拍照" onclick="getPhoto()" />
-                <!--<a style="position: absolute; left: 0;" target="_blank" href="" id="saveTest">saveTest</a>-->
-                <input id="keepimg" type="button" value="识别"  />
-            </div>
-
-            <div id="information_box" class="ax_default box_1">
-                <div id="information_title" class="ax_default _一级标题">
-                    <p><span>会员信息</span></p>
-                    <p th:text="'Hello！' + ${vip} + '!'"></p>
-                </div>
-
-            </div>
-        </div>
+      <div class="container-fluid" style="padding-top: 30px">
+          <div class="row">
+              <div class="col">
+                  <h6>杉德无人超市自助结账系统</h6>
+              </div>
+              <div class="col-6">
+                  <h6>南京紫东创意园店</h6>
+              </div>
+              <div class="col">
+                  <h6 id="time" style="color: black;"></h6>
+                  <script>
+                      function mytime(){
+                          var a = new Date();
+                          var b = a.toLocaleTimeString();
+                          var c = a.toLocaleDateString();
+                          document.getElementById("time").innerHTML = c+"&nbsp"+b;
+                      }
+                      setInterval(function() {mytime()},1000);
+                  </script>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col">
+                  <div class="card">
+                      <div class="card-body">
+                          <p>购物车</p>
+                          <div class="row">
+                              <div class="col-sm-6">
+                                  名称
+                              </div>
+                              <div class="col-sm-2">
+                                  数量
+                              </div>
+                              <div class="col-sm-4">
+                                  价格
+                              </div>
+                          </div>
+                          <div class="row">
+                              <div class="col-sm-6">
+                                  红牛（300ml）
+                              </div>
+                              <div class="col-sm-2">
+                                  2
+                              </div>
+                              <div class="col-sm-4">
+                                  ￥12.00
+                              </div>
+                          </div>
+                          <div class="row">
+                              <div class="col-sm-6">
+                                  红牛（300ml）
+                              </div>
+                              <div class="col-sm-2">
+                                  2
+                              </div>
+                              <div class="col-sm-4">
+                                  ￥12.00
+                              </div>
+                          </div>
+                          <div class="row">
+                              <div class="col-sm-6">
+                                  红牛（300ml）
+                              </div>
+                              <div class="col-sm-2">
+                                  2
+                              </div>
+                              <div class="col-sm-4">
+                                  ￥12.00
+                              </div>
+                          </div>
+                          <div class="row">
+                              <div class="col-sm-6">
+                                  红牛（300ml）
+                              </div>
+                              <div class="col-sm-2">
+                                  2
+                              </div>
+                              <div class="col-sm-4">
+                                  ￥12.00
+                              </div>
+                          </div>
+                          <div class="row">
+                              <div class="col-sm-6">
+                                  红牛（300ml）
+                              </div>
+                              <div class="col-sm-2">
+                                  2
+                              </div>
+                              <div class="col-sm-4">
+                                  ￥12.00
+                              </div>
+                          </div>
+                          <input style="margin-top: 20px;" class="btn btn-primary" type="button" value="结账"  />
+                      </div>
+                  </div>
+              </div>
+              <div class="col-6">
+                  <div class="card" style="padding-bottom: 30px;">
+                      <div id="face_video">
+                          <video id="video" preload autoplay loop muted></video>
+                          <canvas id="canvas" width="581" height="436"></canvas>
+                          <canvas id="shortCut" width="581" height="436"></canvas>
+                      </div>
+                      <div style="margin-top: 30px" class="text-center">
+                          <input class="btn btn-primary btn-lg" id="btn" type="button" value="拍照" onclick="getPhoto()" />
+                          <!--<a style="position: absolute; left: 0;" target="_blank" href="" id="saveTest">saveTest</a>-->
+                          <input class="btn btn-link btn-lg" id="keepimg" type="button" value="识别"  />
+                      </div>
+                  </div>
+              </div>
+              <div class="col">
+                  <div class="card">
+                      <div class="card-body">
+                          会员信息
+                          <p th:text="'Hello！' + ${vip} + '!'"></p>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+    <div id="u0" class="" data-left="33" data-top="222" data-width="1768" data-height="908">
         <form action="/getImg" method="post" id="test_form">
         <input type=hidden id="imgData" name="imgData" value="">
     </form>
