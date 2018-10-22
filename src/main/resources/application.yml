@@ -1,11 +1,11 @@
 spring:
   thymeleaf:
     mode: HTML5
-#  data:
-#    mongodb:
-#      host: 127.0.0.1
-#      port: 27017
-#      database: test1
+  data:
+    mongodb:
+      host: dds-bp176d55b02fb394-pub.mongodb.rds.aliyuncs.com
+      port: 3717
+      database: csrs
 
 mvc:
   view:

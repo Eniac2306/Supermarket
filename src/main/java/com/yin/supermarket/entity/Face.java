@@ -1,13 +1,14 @@
-package com.yin.supermarket.Entity;
+package com.yin.supermarket.entity;
 
-//import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Id;
 
-public class User {
+public class Face {
     private Long id;
     private String userName;
     private Integer age;
     private boolean sex;
 
+    @Id
     public Long getId() {
         return id;
     }
@@ -16,11 +17,11 @@ public class User {
         this.id = id;
     }
 
-    public String getUserName() {
+    public String getName() {
         return userName;
     }
 
-    public void setUserName(String userName) {
+    public void setName(String userName) {
         this.userName = userName;
     }
 

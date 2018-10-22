@@ -1,5 +1,7 @@
 package com.yin.supermarket.controller;
 
+import com.yin.supermarket.dao.IUserRepository;
+import com.yin.supermarket.entity.User;
 import com.yin.supermarket.service.FacePageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.Date;
+import java.util.Optional;
 
 @Controller
 public class FacePageController {
@@ -19,9 +22,14 @@ public class FacePageController {
     @Autowired
     FacePageService facePageService;
 
+    @Autowired
+    IUserRepository userRepository;
+
 
     @RequestMapping("/")
     public String facePage() {
+//        Optional user = userRepository.findById("尹泽然");
+//        System.out.println(user);
         return "system/facePage";
     }
 
