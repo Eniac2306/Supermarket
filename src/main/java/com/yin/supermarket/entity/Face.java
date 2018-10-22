@@ -1,28 +1,30 @@
 package com.yin.supermarket.entity;
 
+
 import org.springframework.data.annotation.Id;
 
 public class Face {
-    private Long id;
-    private String userName;
+    private String name;
     private Integer age;
-    private boolean sex;
+    private String sex;
+    private String feature;
+    private String id;
 
     @Id
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
     public String getName() {
-        return userName;
+        return name;
     }
 
-    public void setName(String userName) {
-        this.userName = userName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Integer getAge() {
@@ -33,11 +35,19 @@ public class Face {
         this.age = age;
     }
 
-    public boolean isSex() {
+    public String getSex() {
         return sex;
     }
 
-    public void setSex(boolean sex) {
+    public void setSex(String sex) {
         this.sex = sex;
+    }
+
+    public String getFeature() {
+        return feature;
+    }
+
+    public void setFeature(String feature) {
+        this.feature = feature;
     }
 }

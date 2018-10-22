@@ -5,6 +5,8 @@ spring:
     mongodb:
       host: dds-bp176d55b02fb394-pub.mongodb.rds.aliyuncs.com
       port: 3717
+      username: csrs
+      password: csrs
       database: csrs
 
 mvc:
