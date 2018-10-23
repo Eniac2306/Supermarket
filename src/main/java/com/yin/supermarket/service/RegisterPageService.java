@@ -1,5 +1,8 @@
 package com.yin.supermarket.service;
 
+import com.yin.supermarket.dao.IFaceRepository;
+import com.yin.supermarket.entity.Face;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestTemplate;
@@ -10,6 +13,11 @@ import java.io.OutputStream;
 
 @Service
 public class RegisterPageService {
+
+    @Autowired
+    IFaceRepository faceRepository;
+
+    String result = "";
 
     public boolean GenerateImage(String imgStr, String imgFilePath) {
         if (imgStr == null) //图像数据为空
@@ -34,12 +42,19 @@ public class RegisterPageService {
         }
     }
 
+
     public String saveFaceInfo(String imgTime) throws HttpServerErrorException {
         String url = "http://127.0.0.1:5000/{1}";
         RestTemplate restTemplate = new RestTemplate();
         String temp = restTemplate.getForObject(url, String.class, imgTime); //url,返回类型，url{imgTime}
-        String result = temp.substring(2, temp.length() - 2);
+        result = temp.substring(2, temp.length() - 2);
         System.out.println(result);
-        return "人像记录成功!请继续填写信息";
+        return "人像记录成功!请继续填写信息->";
+    }
+
+    public void saveUserInfo(String name, String sex, Integer age){
+
+        faceRepository.insert(new Face(name,age,sex,result));
+        System.out.println(result);
     }
 }

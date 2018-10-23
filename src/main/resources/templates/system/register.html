@@ -86,14 +86,14 @@
                 <div class="card">
                     <div class="card-body">
                         会员信息
-                        <form  method="post">
+                        <form  action="/submit" method="post" id="user_form">
                             <table border="1" bordercolor="#342364" cellspacing="0" cellpadding="0" width=600>
                                 <tr>
                                     <th colspan="2">注册表单</th>
                                 </tr>
                                 <tr>
                                     <td>输入姓名:</td>
-                                    <td><input type="text" name=user ></td>
+                                    <td><input type="text" name=name ></td>
                                 </tr>
                                 <tr>
                                     <td>输入密码:</td>
@@ -106,9 +106,13 @@
                                 <tr>
                                     <td>选择性别:</td>
                                     <td>
-                                        <input type="radio" name=sex value=male checked="checked">男
-                                        <input type="radio" name=sex value=female>女
+                                        <input type="radio" name="sex" value=male checked="checked">男
+                                        <input type="radio" name="sex" value=female>女
                                     </td>
+                                </tr>
+                                <tr>
+                                    <td>输入年龄:</td>
+                                    <td><input type="text" name="age" ></td>
                                 </tr>
                                 <!--<tr>-->
                                     <!--<td>选择国家</td>-->
@@ -134,7 +138,7 @@
         </div>
     </div>
     <div id="u0" class="" data-left="33" data-top="222" data-width="1768" data-height="908">
-        <form action="/facesubmit" method="post" id="test_form">
+        <form action="/facesubmit" method="post" id="face_form">
             <input type=hidden id="faceInfo" name="faceInfo" value="">
         </form>
     </div>
@@ -192,9 +196,16 @@
             var imgDataInput = document.getElementById("faceInfo");
             imgDataInput.value = imgdata;
             // alert(imgDataInput.value);
-            var form = document.getElementById("test_form");
+            var form = document.getElementById("face_form");
             form.submit();
         }
+
+        // function submit() {
+        //
+        //     var form = document.getElementById("user_form");
+        //     form.submit();
+        // }
+
     </script>
 </body>
 </html>

@@ -10,6 +10,15 @@ public class Face {
     private String feature;
     private String id;
 
+
+    public Face(String name,int age,String sex,String feature){
+        this.name = name ;
+        this.age  = age  ;
+        this.sex  = sex  ;
+        this.feature = feature;
+    }
+
+
     @Id
     public String getId() {
         return id;
