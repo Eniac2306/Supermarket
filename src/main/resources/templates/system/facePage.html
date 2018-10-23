@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="UTF-8">
-    <title>index_2</title>
+    <title>结账</title>
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
     <meta name="apple-mobile-web-app-capable" content="yes"/>
     <link href="jquery-ui-themes.css" type="text/css" rel="stylesheet"/>
@@ -164,7 +164,7 @@
                       <div style="margin-top: 30px" class="text-center">
                           <input class="btn btn-primary btn-lg" id="btn" type="button" value="拍照" onclick="getPhoto()" />
                           <!--<a style="position: absolute; left: 0;" target="_blank" href="" id="saveTest">saveTest</a>-->
-                          <input class="btn btn-link btn-lg" id="keepimg" type="button" value="注册" onclick="register()"/>
+                          <input class="btn btn-link btn-lg" id="" type="button" value="注册" onclick="register()"/>
                       </div>
                   </div>
               </div>
@@ -172,7 +172,7 @@
                   <div class="card">
                       <div class="card-body">
                           会员信息
-                          <p th:text="'Hello！' + ${vip} + '!'"></p>
+                          <p th:text="'Hello！' + ${vip} + '!'" ></p>
                       </div>
                   </div>
               </div>
@@ -180,8 +180,11 @@
       </div>
     <div id="u0" class="" data-left="33" data-top="222" data-width="1768" data-height="908">
         <form action="/getImg" method="post" id="test_form">
-        <input type=hidden id="imgData" name="imgData" value="">
-    </form>
+            <input type=hidden id="imgData" name="imgData" value="">
+        </form>
+        <form action="/register" method="get" id="register_form">
+            <input type=hidden id="register" name="register" >
+        </form>
     </div>
     <script type="text/javascript">
         var saveArray = {};
@@ -244,7 +247,8 @@
         }
         
         function register() {
-            
+            var form = document.getElementById("register_form");
+            form.submit();
         }
 
     </script>
