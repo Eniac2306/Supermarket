@@ -1,5 +1,6 @@
 package com.yin.supermarket.controller;
 
+import com.yin.supermarket.entity.Face;
 import com.yin.supermarket.service.FacePageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,7 +21,8 @@ public class FacePageController {
     FacePageService facePageService;
 
     @RequestMapping("/")
-    public String facePage() {
+    public String facePage(Model model) {
+        model.addAttribute("vip_name", "欢迎光临");
         return "system/facePage";
     }
 
@@ -36,16 +38,20 @@ public class FacePageController {
             throw new Exception("出错啦");
         }
         try {
-            String userInfo = facePageService.getInfo(imgTime);
-            if (userInfo == null) {
-                userInfo = "查无此人";
+            Face userFace = facePageService.getInfo(imgTime);
+            if (userFace == null) {
+                model.addAttribute("vip_name", "查无此人哦~");
+            } else {
+                model.addAttribute("vip_name", userFace.getName()); //model传了一个键值对交给前台接收
+                model.addAttribute("vip_age", userFace.getAge());
+                model.addAttribute("vip_sex", userFace.getSex());
             }
-            model.addAttribute("vip", userInfo); //model传了一个键值对交给前台接收
-            return "system/facePage";
         } catch (Exception e) {
             System.out.println(e.toString());
+            model.addAttribute("vip_name", "欢迎光临");
             return "system/facePage";
         }
+        return "system/facePage";
     }
 
 

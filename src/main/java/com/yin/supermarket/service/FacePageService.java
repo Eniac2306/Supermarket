@@ -51,7 +51,7 @@ public class FacePageService {
      * 获取Python服务返回的向量
      */
 
-    public String getInfo(String imgTime) throws HttpServerErrorException {
+    public Face getInfo(String imgTime) throws HttpServerErrorException {
         String url = "http://127.0.0.1:5000/{1}";
         RestTemplate restTemplate = new RestTemplate();
         String result = restTemplate.getForObject(url, String.class, imgTime); //url,返回类型，url{imgTime}
@@ -61,10 +61,10 @@ public class FacePageService {
         return identify(getfeatures);
     }
 
-    private String identify(List<Double> getfeatures) {
+    private Face identify(List<Double> getfeatures) {
         List<Face> features = faceRepository.findAll();
         double min = 1;
-        String name = null;
+        Face userFace = null;
         for (Face face : features) {
             String[] feature = face.getFeature().split(", ");
             List<Double> savedfeatures = Arrays.stream(feature).map(Double::valueOf).collect(toList());
@@ -76,10 +76,11 @@ public class FacePageService {
             temp = Math.sqrt(temp);
             if (temp < 0.9 && temp < min) {
                 min = temp;
-                name = face.getName();
+//                name = face.getName();
+                userFace = face;
             }
             System.out.println(temp);
         }
-        return name;
+        return userFace;
     }
 }
