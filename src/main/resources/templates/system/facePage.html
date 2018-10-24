@@ -174,7 +174,15 @@
                           </div>
                       </div>
                       <div class="card-body">
-
+                          <div class="container">
+                              <h1>您的信息是：</h1>
+                              <dl>
+                                  <dt>性别</dt>
+                                  <dd th:text="${vip_sex}"></dd>
+                                  <dt>年龄</dt>
+                                  <dd th:text="${vip_age}"></dd>
+                              </dl>
+                          </div>
                       </div>
                   </div>
                   <div style="margin-top: 30px" class="text-right">

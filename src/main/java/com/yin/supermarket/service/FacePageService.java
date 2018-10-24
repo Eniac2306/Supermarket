@@ -54,7 +54,7 @@ public class FacePageService {
     public Face getInfo(String imgTime) throws HttpServerErrorException {
         String url = "http://127.0.0.1:5000/{1}";
         RestTemplate restTemplate = new RestTemplate();
-        String result = restTemplate.getForObject(url, String.class, imgTime); //url,返回类型，url{imgTime}
+        String result = restTemplate.getForObject(url, String.class, imgTime); //这里是get方法，post为postForObject()
         String[] substring = result.substring(2, result.length() - 2).split(", ");
         List<Double> getfeatures = Arrays.stream(substring).map(Double::valueOf).collect(toList());
 

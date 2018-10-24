@@ -22,13 +22,14 @@ public class RegisterPageController extends HttpServlet {
     }
 
     @PostMapping("/submit")
-    public String submit(String name, String sex, Integer age) {
+    public String submit(String name, String sex, Integer age, Model model) {
 
         try {
             registerPageService.saveUserInfo(name,sex,age);
         }catch (Exception e){
             return "system/register";
         }
+        model.addAttribute("vip_name", "再试试？");
         return "system/facePage";
     }
 
