@@ -48,7 +48,7 @@ public class RegisterPageService {
         RestTemplate restTemplate = new RestTemplate();
         String temp = restTemplate.getForObject(url, String.class, imgTime); //url,返回类型，url{imgTime}
         result = temp.substring(2, temp.length() - 2);
-        System.out.println(result);
+//        System.out.println(result);
         return "人像记录成功!请继续填写信息->";
     }
 

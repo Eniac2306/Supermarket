@@ -1,6 +1,5 @@
 package com.yin.supermarket.controller;
 
-import com.yin.supermarket.entity.Face;
 import com.yin.supermarket.service.RegisterPageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,9 +22,13 @@ public class RegisterPageController extends HttpServlet {
     }
 
     @PostMapping("/submit")
-    public String submit(Face face, String name, String sex, Integer age) {
+    public String submit(String name, String sex, Integer age) {
 
-        registerPageService.saveUserInfo(name,sex,age);
+        try {
+            registerPageService.saveUserInfo(name,sex,age);
+        }catch (Exception e){
+            return "system/register";
+        }
         return "system/facePage";
     }
 

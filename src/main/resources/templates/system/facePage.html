@@ -7,7 +7,6 @@
     <meta name="apple-mobile-web-app-capable" content="yes"/>
     <link href="jquery-ui-themes.css" type="text/css" rel="stylesheet"/>
     <link href="styles.css" type="text/css" rel="stylesheet"/>
-    <link href="index/styles_2.css" type="text/css" rel="stylesheet"/>
     <script src="scripts/jquery-1.7.1.min.js"></script>
     <script src="scripts/jquery-ui-1.8.10.custom.min.js"></script>
     <script src="scripts/prototypePre.js"></script>
@@ -164,7 +163,6 @@
                       <div style="margin-top: 30px" class="text-center">
                           <input class="btn btn-primary btn-lg" id="btn" type="button" value="拍照" onclick="getPhoto()" />
                           <!--<a style="position: absolute; left: 0;" target="_blank" href="" id="saveTest">saveTest</a>-->
-                          <input class="btn btn-link btn-lg" id="" type="button" value="注册" onclick="register()"/>
                       </div>
                   </div>
               </div>
@@ -174,6 +172,9 @@
                           会员信息
                           <p th:text="'Hello！' + ${vip} + '!'" ></p>
                       </div>
+                  </div>
+                  <div style="margin-top: 30px" class="text-right">
+                      <input class="btn btn-link btn-lg" id="" type="button" value="注册" onclick="register()"/>
                   </div>
               </div>
           </div>
@@ -210,7 +211,7 @@
                     context.strokeRect(rect.x, rect.y, rect.width, rect.height);
                     context.font = '11px Helvetica';
                     context.fillStyle = "#ff918b";
-                    context.fillText('x: ' + rect.x + 'px', rect.x + rect.width + 5, rect.y + 11);
+                    context.fillText('x: ' + rect.x + 'px', rect.x + rect.width + 5, rect.y + 22);
                     context.fillText('y: ' + rect.y + 'px', rect.x + rect.width + 5, rect.y + 22);
                     console.log(rect.x, rect.width, rect.y, rect.height);
                     saveArray.x = rect.x;
