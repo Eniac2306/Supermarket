@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-  <head>
+<head>
     <meta charset="UTF-8">
     <title>结账</title>
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
     <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <link rel="stylesheet" href="css/bootstrap.css">
     <link href="jquery-ui-themes.css" type="text/css" rel="stylesheet"/>
-    <link href="styles.css" type="text/css" rel="stylesheet"/>
-    <script src="scripts/jquery-1.7.1.min.js"></script>
+    <!--<link href="styles.css" type="text/css" rel="stylesheet"/>-->
+    <script src="scripts/jquery-1.11.3.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
     <script src="scripts/jquery-ui-1.8.10.custom.min.js"></script>
     <script src="scripts/prototypePre.js"></script>
     <script src="document.js"></script>
@@ -18,252 +20,269 @@
     <script src="js/eye-min.js"></script>
     <script src="js/mouth-min.js"></script>
     <script type="text/javascript"></script>
-      <style>
-          /*video,#canvas,#shortCut{*/
-              /*position: absolute;*/
-              /*width: 581px;*/
-              /*height: 436px;*/
-              /*margin-left: -290px;*/
-          /*}*/
-          /*#btn,#keepimg {*/
-              /*width: 80px;*/
-              /*height: 60px;*/
-              /*display: inline-block;*/
-              /*background-color: #169BD5;*/
-          /*}*/
-          canvas {
-              position: absolute;
-              left: 0;
-              top: 0;
-              /*width: 100%;*/
-          }
-          video {
-              width:581px;
-              height:436px;
-              background-color:rgba(255, 255, 255, 1);
-          }
-          .text-center {
-              text-align: center;
-          }
+    <style>
+        canvas {
+            position: absolute;
+            left: 0;
+            top: 0;
+            /*width: 100%;*/
+        }
 
-          #face_video {
-              padding-top: 30px;
-              width: 581px;
-              margin: 0 auto;
-              position: relative;
-          }
-      </style>
-      <link rel="stylesheet" href="css/bootstrap.css">
-  </head>
-          
-  <body>
-      <div class="container-fluid" style="padding-top: 30px">
-          <div class="row">
-              <div class="col">
-                  <h6>杉德无人超市自助结账系统</h6>
-              </div>
-              <div class="col-6">
-                  <h6>南京紫东创意园店</h6>
-              </div>
-              <div class="col">
-                  <h6 id="time" style="color: black;"></h6>
-                  <script>
-                      function mytime(){
-                          var a = new Date();
-                          var b = a.toLocaleTimeString();
-                          var c = a.toLocaleDateString();
-                          document.getElementById("time").innerHTML = c+"&nbsp"+b;
-                      }
-                      setInterval(function() {mytime()},1000);
-                  </script>
-              </div>
-          </div>
-          <div class="row">
-              <div class="col">
-                  <div class="card">
-                      <div class="card-body">
-                          <p>购物车</p>
-                          <div class="row">
-                              <div class="col-sm-6">
-                                  名称
-                              </div>
-                              <div class="col-sm-2">
-                                  数量
-                              </div>
-                              <div class="col-sm-4">
-                                  价格
-                              </div>
-                          </div>
-                          <div class="row">
-                              <div class="col-sm-6">
-                                  红牛（300ml）
-                              </div>
-                              <div class="col-sm-2">
-                                  2
-                              </div>
-                              <div class="col-sm-4">
-                                  ￥12.00
-                              </div>
-                          </div>
-                          <div class="row">
-                              <div class="col-sm-6">
-                                  红牛（300ml）
-                              </div>
-                              <div class="col-sm-2">
-                                  2
-                              </div>
-                              <div class="col-sm-4">
-                                  ￥12.00
-                              </div>
-                          </div>
-                          <div class="row">
-                              <div class="col-sm-6">
-                                  红牛（300ml）
-                              </div>
-                              <div class="col-sm-2">
-                                  2
-                              </div>
-                              <div class="col-sm-4">
-                                  ￥12.00
-                              </div>
-                          </div>
-                          <div class="row">
-                              <div class="col-sm-6">
-                                  红牛（300ml）
-                              </div>
-                              <div class="col-sm-2">
-                                  2
-                              </div>
-                              <div class="col-sm-4">
-                                  ￥12.00
-                              </div>
-                          </div>
-                          <div class="row">
-                              <div class="col-sm-6">
-                                  红牛（300ml）
-                              </div>
-                              <div class="col-sm-2">
-                                  2
-                              </div>
-                              <div class="col-sm-4">
-                                  ￥12.00
-                              </div>
-                          </div>
-                          <input style="margin-top: 20px;" class="btn btn-primary" type="button" value="结账"  />
-                      </div>
-                  </div>
-              </div>
-              <div class="col-6">
-                  <div class="card" style="padding-bottom: 30px;">
-                      <div id="face_video">
-                          <video id="video" preload autoplay loop muted></video>
-                          <canvas id="canvas" width="581" height="436"></canvas>
-                          <canvas id="shortCut" width="581" height="436"></canvas>
-                      </div>
-                      <div style="margin-top: 30px" class="text-center">
-                          <input class="btn btn-primary btn-lg" id="btn" type="button" value="拍照" onclick="getPhoto()" />
-                          <!--<a style="position: absolute; left: 0;" target="_blank" href="" id="saveTest">saveTest</a>-->
-                      </div>
-                  </div>
-              </div>
-              <div class="col">
-                  <div class="card">
-                      <div class="card-title">
-                          <div class="text-center" >
-                              <p th:text="'Hello！' + ${vip_name} + '!'" style="font: xx-large 'Apple Color Emoji'"></p>
-                          </div>
-                      </div>
-                      <div class="card-body">
-                          <div class="container">
-                              <h1>您的信息是：</h1>
-                              <dl>
-                                  <dt>性别</dt>
-                                  <dd th:text="${vip_sex}"></dd>
-                                  <dt>年龄</dt>
-                                  <dd th:text="${vip_age}"></dd>
-                              </dl>
-                          </div>
-                      </div>
-                  </div>
-                  <div style="margin-top: 30px" class="text-right">
-                      <input class="btn btn-link btn-lg" id="" type="button" value="注册" onclick="register()"/>
-                  </div>
-              </div>
-          </div>
-      </div>
-    <div id="u0" class="" data-left="33" data-top="222" data-width="1768" data-height="908">
-        <form action="/getImg" method="post" id="test_form">
-            <input type=hidden id="imgData" name="imgData" value="">
-        </form>
-        <form action="/register" method="get" id="register_form">
-            <input type=hidden id="register" name="register" >
-        </form>
+        video {
+            width: 581px;
+            height: 436px;
+            background-color: rgba(255, 255, 255, 1);
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        #face_video {
+            padding-top: 30px;
+            width: 581px;
+            margin: 0 auto;
+            position: relative;
+        }
+    </style>
+</head>
+
+<body>
+<div class="bg-dark text-white" style="padding-top: 100px">
+    <div class="row">
+        <div class="col">
+            <div class="bg-dark text-white">
+                <h1>杉德无人超市自助结账系统</h1>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="bg-dark text-white">
+                <h2>南京紫东创意园店</h2>
+            </div>
+        </div>
+        <div class="col">
+            <div class="bg-dark text-white">
+                <h6 id="time" style="color: white;"></h6>
+                <script>
+                    function mytime() {
+                        var a = new Date();
+                        var b = a.toLocaleTimeString();
+                        var c = a.toLocaleDateString();
+                        document.getElementById("time").innerHTML = c + "&nbsp" + b;
+                    }
+
+                    setInterval(function () {
+                        mytime()
+                    }, 1000);
+                </script>
+            </div>
+        </div>
     </div>
-    <script type="text/javascript">
-        var saveArray = {};
-        var video = document.getElementById('video');
-        var faceLine = document.getElementById('canvas');
-        var context = faceLine.getContext('2d');
-        var shortcut = document.getElementById('shortCut');
-        var context2 = shortcut.getContext('2d');
+    <div class="row">
+        <div class="col">
+            <div class="bg-dark text-white">
+                <h2 class="text-muted">购物车</h2>
+                <table class="table table-dark table-striped">
+                    <thead>
+                    <tr>
+                        <th>名称</th>
+                        <th>数量</th>
+                        <th>单价</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>水杯</td>
+                        <td>1</td>
+                        <td>￥12.00</td>
+                    </tr>
+                    <tr>
+                        <td>巧乐兹冰淇淋</td>
+                        <td>2</td>
+                        <td>￥3.00</td>
+                    </tr>
+                    <tr>
+                        <td>乐事薯片 （原味）</td>
+                        <td>3</td>
+                        <td>￥8.00</td>
+                    </tr>
+                    <tr>
+                        <td>安慕希酸奶</td>
+                        <td>12</td>
+                        <td>￥10.00</td>
+                    </tr>
+                    <tr>
+                        <td>红牛（300ml）</td>
+                        <td>2</td>
+                        <td>￥6.00</td>
+                    </tr>
+                    <tr>
+                        <td>陶瓷碗</td>
+                        <td>6</td>
+                        <td>￥5.00</td>
+                    </tr>
+                    <tr>
+                        <td>陶瓷碗</td>
+                        <td>6</td>
+                        <td>￥5.00</td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="row">
+                    <div class="col-sm-6"></div>
+                    <div class="col-sm-6">
+                        <h3 class="text-success">总价：￥204</h3>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <input style="margin-top: 20px;" class="btn btn-primary" type="button" value="确认商品"/>
+                </div>
+            </div>
+        </div>
 
-        window.onload = function () {
-            var tracker = new tracking.ObjectTracker('face');
-            tracker.setInitialScale(4);
-            tracker.setStepSize(2);
-            tracker.setEdgesDensity(0.1);
+        <div class="col-6">
+            <div class="bg-dark " style="padding-bottom: 30px;">
+                <div id="face_video">
+                    <video id="video" preload autoplay loop muted></video>
+                    <canvas id="canvas" width="581" height="436"></canvas>
+                    <canvas id="shortCut" width="581" height="436"></canvas>
+                </div>
+                <div style="margin-top: 30px" class="text-center">
+                    <input class="btn btn-primary btn-lg" id="btn" type="button" value="识别" onclick="getPhoto()"/>
+                    <!--<a style="position: absolute; left: 0;" target="_blank" href="" id="saveTest">saveTest</a>-->
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="bg-dark text-white">
+                <div class="card-title">
+                    <div class="text-center">
+                        <p th:text="'Hello！' + ${vip_name} + '!'" style="font: xx-large 'Apple Color Emoji'"></p>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="container">
+                        <h1>您的信息是：</h1>
+                        <dl>
+                            <!--<dt>性别</dt>-->
+                            <!--<dd th:text="${vip_sex}"></dd>-->
+                            <!--<dt>年龄</dt>-->
+                            <!--<dd th:text="${vip_age}"></dd>-->
+                            <dt>卡号</dt>
+                            <dd th:text="${vip_id}"></dd>
+                            <dt>余额</dt>
+                            <dd th:text="${vip_money}"></dd>
+                            <dt>卡状态</dt>
+                            <dd th:text="正常"></dd>
+                            <dt>是否支持免密支付</dt>
+                            <dd th:text="是"></dd>
+                        </dl>
+                        <h1>消费操作</h1>
+                        <dl>
+                            <dt class="font-weight-bold">本次消费金额：204.00</dt>
+                            <dt class="font-weight-bold">卡内余额：300.30</dt>
+                            <dt class="font-weight-bold">消费后卡内剩余金额：96.30</dt>
 
-            tracking.track('#video', tracker, {camera: true});
+                        </dl>
+                    </div>
+                </div>
+                <div class="row">
+                    <div style="margin-top: 30px" class="col-3">
+                        <button type="button" class="btn btn-success">
+                            确认支付
+                        </button>
+                    </div>
+                    <div class="col-1"></div>
+                    <div style="margin-top: 30px" class="col-3">
+                        <input class="btn btn-secondary" type="button" value="放弃支付"/>
+                    </div>
+                    <div class="col-1"></div>
+                    <div style="margin-top: 30px" class="col-3">
+                        <input class="btn btn-light" type="button" value="杉德卡充值"/>
+                    </div>
+                </div>
+            </div>
+            <div style="margin-top: 30px" class="text-right">
+                <input class="btn btn-link btn-lg" id="" type="button" value="注册" onclick="register()"/>
+            </div>
+        </div>
+    </div>
+</div>
 
-            tracker.on('track', function (event) {
-                context.clearRect(0, 0, faceLine.width, faceLine.height);
+<div id="u0" class="" data-left="33" data-top="222" data-width="1768" data-height="908">
+    <form action="/getImg" method="post" id="test_form">
+        <input type=hidden id="imgData" name="imgData" value="">
+    </form>
+    <form action="/register" method="get" id="register_form">
+        <input type=hidden id="register" name="register">
+    </form>
+</div>
+<script type="text/javascript">
+    var saveArray = {};
+    var video = document.getElementById('video');
+    var faceLine = document.getElementById('canvas');
+    var context = faceLine.getContext('2d');
+    var shortcut = document.getElementById('shortCut');
+    var context2 = shortcut.getContext('2d');
 
-                event.data.forEach(function (rect) {
-                    context.strokeStyle = '#bfaeff';
-                    context.strokeRect(rect.x, rect.y, rect.width, rect.height);
-                    context.font = '11px Helvetica';
-                    context.fillStyle = "#ff918b";
-                    context.fillText('x: ' + rect.x + 'px', rect.x + rect.width + 5, rect.y + 22);
-                    context.fillText('y: ' + rect.y + 'px', rect.x + rect.width + 5, rect.y + 22);
-                    console.log(rect.x, rect.width, rect.y, rect.height);
-                    saveArray.x = rect.x;
-                    saveArray.y = rect.y;
-                    saveArray.width = rect.width;
-                    saveArray.height = rect.height;
-                });
+    window.onload = function () {
+        var tracker = new tracking.ObjectTracker('face');
+        tracker.setInitialScale(4);
+        tracker.setStepSize(2);
+        tracker.setEdgesDensity(0.1);
+
+        tracking.track('#video', tracker, {camera: true});
+
+        tracker.on('track', function (event) {
+            context.clearRect(0, 0, faceLine.width, faceLine.height);
+
+            event.data.forEach(function (rect) {
+                context.strokeStyle = '#bfaeff';
+                context.strokeRect(rect.x, rect.y, rect.width, rect.height);
+                context.font = '11px Helvetica';
+                context.fillStyle = "#ff918b";
+                context.fillText('x: ' + rect.x + 'px', rect.x + rect.width + 5, rect.y + 22);
+                context.fillText('y: ' + rect.y + 'px', rect.x + rect.width + 5, rect.y + 22);
+                console.log(rect.x, rect.width, rect.y, rect.height);
+                saveArray.x = rect.x;
+                saveArray.y = rect.y;
+                saveArray.width = rect.width;
+                saveArray.height = rect.height;
             });
-        }
+        });
+    }
 
-        function getPhoto() {
-            context2.drawImage(video, 0, 0, 581, 436); //将video对象内指定的区域捕捉绘制到画布上指定的区域，实现拍照。
-            //var img = convertCanvasToImage(video);
-            Download();
-        }
-        var saveTest = document.getElementById('saveTest')
-        saveTest.addEventListener('click', function (ev) {
-            saveTest.href = document.getElementById("shortCut").toDataURL()
-            // saveTest.download = 'a.png'
-        }, false)
+    function getPhoto() {
+        context2.drawImage(video, 0, 0, 581, 436); //将video对象内指定的区域捕捉绘制到画布上指定的区域，实现拍照。
+        //var img = convertCanvasToImage(video);
+        Download();
+    }
 
-        function Download() {
-            //cavas 保存图片到本地  js 实现
-            //------------------------------------------------------------------------
-            //1.确定图片的类型  获取到的图片格式 data:image/Png;base64,......
-            var type = 'jpg';
-            var d = document.getElementById("shortCut");
-            var imgdata = d.toDataURL(type);
-            var imgDataInput = document.getElementById("imgData");
-            imgDataInput.value = imgdata;
-            //alert(imgDataInput.value);
-            var form = document.getElementById("test_form");
-            form.submit();
-        }
-        
-        function register() {
-            var form = document.getElementById("register_form");
-            form.submit();
-        }
+    var saveTest = document.getElementById('saveTest')
+    saveTest.addEventListener('click', function (ev) {
+        saveTest.href = document.getElementById("shortCut").toDataURL()
+        // saveTest.download = 'a.png'
+    }, false)
 
-    </script>
-  </body>
+    function Download() {
+        //cavas 保存图片到本地  js 实现
+        //------------------------------------------------------------------------
+        //1.确定图片的类型  获取到的图片格式 data:image/Png;base64,......
+        var type = 'jpg';
+        var d = document.getElementById("shortCut");
+        var imgdata = d.toDataURL(type);
+        var imgDataInput = document.getElementById("imgData");
+        imgDataInput.value = imgdata;
+        //alert(imgDataInput.value);
+        var form = document.getElementById("test_form");
+        form.submit();
+    }
+
+    function register() {
+        var form = document.getElementById("register_form");
+        form.submit();
+    }
+
+</script>
+</body>
 </html>
