@@ -9,7 +9,7 @@
     <link href="jquery-ui-themes.css" type="text/css" rel="stylesheet"/>
     <!--<link href="styles.css" type="text/css" rel="stylesheet"/>-->
     <script src="scripts/jquery-1.11.3.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap.bundle.js"></script>
     <script src="scripts/jquery-ui-1.8.10.custom.min.js"></script>
     <script src="scripts/prototypePre.js"></script>
     <script src="document.js"></script>
@@ -44,18 +44,21 @@
             margin: 0 auto;
             position: relative;
         }
+        body {
+            background-color: #343a40;
+        }
     </style>
 </head>
 
 <body>
-<div class="bg-dark text-white" style="padding-top: 150px">
+<div class="bg-dark text-white" style="padding-top: 100px">
     <div class="row">
         <div class="col">
             <div class="bg-dark text-white">
                 <h1>杉德无人超市自助结账系统</h1>
             </div>
         </div>
-        <div class="col-4">
+        <div class="col-6">
             <div class="bg-dark text-white">
                 <h2>南京紫东创意园店</h2>
             </div>
@@ -187,13 +190,13 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div style="margin-top: 30px" class="col-2">
-                        <button type="button" class="btn btn-success">
+                    <div style="margin-top: 30px" class="col-3">
+                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">
                             确认支付
                         </button>
                     </div>
                     <div class="col-1"></div>
-                    <div style="margin-top: 30px" class="col-2">
+                    <div style="margin-top: 30px" class="col-3">
                         <input class="btn btn-secondary" type="button" value="放弃支付"/>
                     </div>
                     <div class="col-1"></div>
@@ -204,6 +207,28 @@
             </div>
             <div style="margin-top: 30px" class="text-right">
                 <input class="btn btn-link btn-lg" id="" type="button" value="注册" onclick="register()"/>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
             </div>
         </div>
     </div>
