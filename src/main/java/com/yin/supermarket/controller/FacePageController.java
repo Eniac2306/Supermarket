@@ -47,7 +47,7 @@ public class FacePageController {
                 model.addAttribute("vip_sex", userFace.getSex());
             }
         } catch (Exception e) {
-            System.out.println(e.toString());
+            e.printStackTrace();
             model.addAttribute("vip_name", "欢迎光临");
             return "system/facePage";
         }

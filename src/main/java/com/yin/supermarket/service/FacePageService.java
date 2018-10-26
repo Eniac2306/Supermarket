@@ -4,6 +4,7 @@ import com.yin.supermarket.dao.IFaceRepository;
 import com.yin.supermarket.entity.Face;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestTemplate;
 import sun.misc.BASE64Decoder;
@@ -66,6 +67,8 @@ public class FacePageService {
         double min = 1;
         Face userFace = null;
         for (Face face : features) {
+            if(StringUtils.isEmpty(face.getFeature()))
+                continue;
             String[] feature = face.getFeature().split(", ");
             List<Double> savedfeatures = Arrays.stream(feature).map(Double::valueOf).collect(toList());
             double temp = 0;
@@ -74,7 +77,7 @@ public class FacePageService {
                 temp += v * v;
             }
             temp = Math.sqrt(temp);
-            if (temp < 0.9 && temp < min) {
+            if (temp < 0.8 && temp < min) {
                 min = temp;
 //                name = face.getName();
                 userFace = face;
