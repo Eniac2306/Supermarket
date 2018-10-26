@@ -43,7 +43,7 @@ public class RegisterPageService {
     }
 
 
-    public String saveFaceInfo(String imgTime) throws HttpServerErrorException {
+    public String readFaceInfo(String imgTime) throws HttpServerErrorException {
         String url = "http://127.0.0.1:5000/{1}";
         RestTemplate restTemplate = new RestTemplate();
         String temp = restTemplate.getForObject(url, String.class, imgTime); //url,返回类型，url{imgTime}
@@ -52,9 +52,9 @@ public class RegisterPageService {
         return "人像记录成功!请继续填写信息->";
     }
 
-    public void saveUserInfo(String name, String id_num, String psw){
+    public void saveUserInfo(String name, String id_num, String psw, long filename) {
 
-        faceRepository.insert(new Face(name,id_num,psw,result));
+        faceRepository.save(new Face(name,id_num,psw,result,filename+".jpg"));
         System.out.println(result);
     }
 }

@@ -57,12 +57,12 @@ public class FacePageService {
         RestTemplate restTemplate = new RestTemplate();
         String result = restTemplate.getForObject(url, String.class, imgTime); //这里是get方法，post为postForObject()
         String[] substring = result.substring(2, result.length() - 2).split(", ");
-        List<Double> getfeatures = Arrays.stream(substring).map(Double::valueOf).collect(toList());
+        List<Double> getFeatures = Arrays.stream(substring).map(Double::valueOf).collect(toList());
 
-        return identify(getfeatures);
+        return identify(getFeatures);
     }
 
-    private Face identify(List<Double> getfeatures) {
+    private Face identify(List<Double> getFeatures) {
         List<Face> features = faceRepository.findAll();
         double min = 1;
         Face userFace = null;
@@ -70,14 +70,14 @@ public class FacePageService {
             if(StringUtils.isEmpty(face.getFeature()))
                 continue;
             String[] feature = face.getFeature().split(", ");
-            List<Double> savedfeatures = Arrays.stream(feature).map(Double::valueOf).collect(toList());
+            List<Double> savedFeatures = Arrays.stream(feature).map(Double::valueOf).collect(toList());
             double temp = 0;
-            for (int i = 0; i < savedfeatures.size(); i++) {
-                double v = savedfeatures.get(i) - getfeatures.get(i);
+            for (int i = 0; i < savedFeatures.size(); i++) {
+                double v = savedFeatures.get(i) - getFeatures.get(i);
                 temp += v * v;
             }
             temp = Math.sqrt(temp);
-            if (temp < 0.8 && temp < min) {
+            if (temp < 0.85 && temp < min) {
                 min = temp;
 //                name = face.getName();
                 userFace = face;

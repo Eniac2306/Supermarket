@@ -9,6 +9,7 @@
     <link href="jquery-ui-themes.css" type="text/css" rel="stylesheet"/>
     <link href="index/styles_2.css" type="text/css" rel="stylesheet"/>
     <script src="scripts/jquery-1.11.3.min.js"></script>
+    <script src="js/bootstrap.bundle.js"></script>
     <script src="scripts/jquery-ui-1.8.10.custom.min.js"></script>
     <script src="scripts/prototypePre.js"></script>
     <script src="document.js"></script>
@@ -19,38 +20,98 @@
         .text-center {
             text-align: center;
         }
+
+        body {
+            background-color: #343a40;
+        }
     </style>
 
 </head>
+<body>
+<div class="bg-dark text-white" style="padding-top: 100px">
+    <div class="row">
+        <div class="col-1"></div>
+        <div class="col">
+            <div class="bg-dark text-white">
+                <h1>杉德无人超市自助结账系统</h1>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="bg-dark text-white">
+                <h2>人像管理</h2>
+            </div>
+        </div>
+        <div class="col">
+            <div class="bg-dark text-white">
+                <h6 id="time" style="color: white;"></h6>
+                <script>
+                    function mytime() {
+                        var a = new Date();
+                        var b = a.toLocaleTimeString();
+                        var c = a.toLocaleDateString();
+                        document.getElementById("time").innerHTML = c + "&nbsp" + b;
+                    }
 
-<div class="container">
-    <h2>Table</h2>
-    <p> .table-hover 类启用表格中 tbody 上的行的悬停效果：</p>
-    <table class="table table-hover">
-        <thead>
-        <tr>
-            <th>#</th>
-            <th>Firstname</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td>1</td>
-            <td>Anna</td>
-        </tr>
-        <tr>
-            <td>2</td>
-            <td>Debbie</td>
-        </tr>
-        <tr>
-            <td>3</td>
-            <td>John</td>
-        </tr>
-        </tbody>
-    </table>
+                    setInterval(function () {
+                        mytime()
+                    }, 1000);
+                </script>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="padding-top: 200px"></div>
+    <div class="container">
+        <h2>人像库</h2>
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>姓名</th>
+                <th>卡号</th>
+                <th>余额</th>
+                <th>人像</th>
+            </tr>
+            </thead>
+            <tbody th:each="face : ${list}">
+            <td th:text="${face.name}"></td>
+            <td th:text="${face.id_num}"></td>
+            <td th:text="${face.money}"></td>
+            <td>
+                <button class="btn btn-link" th:value="${face.filename}" onclick="getImg(this.value)">
+                    显示人像
+                </button>
+            </td>
+            </tbody>
+        </table>
+    </div>
 </div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+                <!--<span aria-hidden="true">&times;</span>-->
+                <!--</button>-->
+            </div>
+            <div class="modal-body">
+                <h2>支付成功！</h2>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
 <script type="text/javascript">
 
+    function getImg(path) {
+        var p='/test?path='+path
+        window.open (p, 'newwindow',
+            'height=436, width=581, top=400 , left=1000, toolbar=no, menubar=no, scrollbars=no, resizable=no,location=n o, status=no')
+
+    }
 
 </script>
 </body>

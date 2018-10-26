@@ -16,6 +16,8 @@ public class RegisterPageController extends HttpServlet {
     @Autowired
     RegisterPageService registerPageService;
 
+    long time = 0;
+
     @GetMapping("/register")
     public String registerPage() {
         return "system/register";
@@ -25,7 +27,7 @@ public class RegisterPageController extends HttpServlet {
     public String submit(String name, String id_num, String psw, Model model) {
 
         try {
-            registerPageService.saveUserInfo(name,id_num,psw);
+            registerPageService.saveUserInfo(name,id_num,psw,time);
         }catch (Exception e){
             return "system/register";
         }
@@ -36,15 +38,15 @@ public class RegisterPageController extends HttpServlet {
     @PostMapping("/facesubmit")
     public String saveFace(String faceInfo, Model model) throws Exception {
 
-        long Time = new Date().getTime();
-        String imgTime = String.valueOf(Time);
+        time = new Date().getTime();
+        String imgTime = String.valueOf(time);
 
         String[] split = faceInfo.split(",", 2);
         String imgFilePath = "D:\\supermarket\\" + imgTime + ".jpg";
         if (!registerPageService.GenerateImage(split[1], imgFilePath)) {
             throw new Exception("出错啦");
         }
-        String result = registerPageService.saveFaceInfo(imgTime);
+        String result = registerPageService.readFaceInfo(imgTime);
         model.addAttribute("result", result);
         return "system/register";
     }

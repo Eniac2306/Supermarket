@@ -47,12 +47,26 @@
         body {
             background-color: #343a40;
         }
+
+        .modal-dialog {
+            position: absolute;
+            top: 40%;
+            left: 45%;
+            z-index: 3;
+        }
+        .table{
+            height: 450px;
+            width: 500px;
+
+        }
+
     </style>
 </head>
 
 <body>
 <div class="bg-dark text-white" style="padding-top: 100px">
     <div class="row">
+        <div class="col-1"></div>
         <div class="col">
             <div class="bg-dark text-white">
                 <h1>杉德无人超市自助结账系统</h1>
@@ -81,8 +95,10 @@
             </div>
         </div>
     </div>
+    <div class="row" style="padding-top: 200px"></div>
     <div class="row">
-        <div class="col">
+        <div class="col-sm-1"></div>
+        <div class="col-3">
             <div class="bg-dark text-white">
                 <h2 class="text-muted">购物车</h2>
                 <table class="table table-dark table-striped">
@@ -143,7 +159,7 @@
             </div>
         </div>
 
-        <div class="col-6">
+        <div class="col-4">
             <div class="bg-dark " style="padding-bottom: 30px;">
                 <div id="face_video">
                     <video id="video" preload autoplay loop muted></video>
@@ -190,17 +206,17 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div style="margin-top: 30px" class="col-3">
+                    <div style="margin-top: 30px" class="col-2">
                         <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">
                             确认支付
                         </button>
                     </div>
                     <div class="col-1"></div>
-                    <div style="margin-top: 30px" class="col-3">
+                    <div style="margin-top: 30px" class="col-2">
                         <input class="btn btn-secondary" type="button" value="放弃支付"/>
                     </div>
                     <div class="col-1"></div>
-                    <div style="margin-top: 30px" class="col-3">
+                    <div style="margin-top: 30px" class="col-2">
                         <input class="btn btn-light" type="button" value="杉德卡充值"/>
                     </div>
                 </div>
@@ -209,6 +225,7 @@
                 <input class="btn btn-link btn-lg" id="" type="button" value="注册" onclick="register()"/>
             </div>
         </div>
+        <div class="col-sm-1"></div>
     </div>
 
 </div>
@@ -218,17 +235,15 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+                <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+                    <!--<span aria-hidden="true">&times;</span>-->
+                <!--</button>-->
             </div>
             <div class="modal-body">
-                ...
+                <h2>支付成功！</h2>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
             </div>
         </div>
     </div>
@@ -307,6 +322,7 @@
         var form = document.getElementById("register_form");
         form.submit();
     }
+
 
 </script>
 </body>

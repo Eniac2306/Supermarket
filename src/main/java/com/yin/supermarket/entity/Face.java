@@ -3,22 +3,23 @@ package com.yin.supermarket.entity;
 import org.springframework.data.annotation.Id;
 
 public class Face {
+    @Id
+    private String id;
     private String name;
     private String feature;
-    private String id;
     private String id_num;
-    private String facePath;
+    private String filename;
     private String psw;
     private Double money;
 
-    public Face(String name, String id_num, String psw, String feature) {
+    public Face(String name, String id_num, String psw, String feature,String filename) {
         this.name = name;
         this.feature = feature;
         this.id_num = id_num;
         this.psw = psw;
+        this.filename = filename;
     }
 
-    @Id
     public String getId() {
         return this.id;
     }
@@ -67,11 +68,11 @@ public class Face {
         this.psw = psw;
     }
 
-    public String getFacePath() {
-        return this.facePath;
+    public String getFilename() {
+        return this.filename;
     }
 
-    public void setFacePath(String facePath) {
-        this.facePath = facePath;
+    public void setFilename(String filename) {
+        this.filename = filename;
     }
 }
