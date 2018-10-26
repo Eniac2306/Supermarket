@@ -43,8 +43,10 @@ public class FacePageController {
                 model.addAttribute("vip_name", "查无此人哦~");
             } else {
                 model.addAttribute("vip_name", userFace.getName()); //model传了一个键值对交给前台接收
-                model.addAttribute("vip_age", userFace.getAge());
-                model.addAttribute("vip_sex", userFace.getSex());
+//                model.addAttribute("vip_age", userFace.getAge());
+//                model.addAttribute("vip_sex", userFace.getSex());
+                model.addAttribute("vip_id",userFace.getId_num());
+                model.addAttribute("vip_money",userFace.getMoney());
             }
         } catch (Exception e) {
             e.printStackTrace();

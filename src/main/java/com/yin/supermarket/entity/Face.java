@@ -9,13 +9,17 @@ public class Face {
     private String sex;
     private String feature;
     private String id;
+    private String id_num;
+    private Double money;
 
 
-    public Face(String name,int age,String sex,String feature){
+    public Face(String name,int age,String sex, String id_num, double money,String feature){
         this.name = name ;
         this.age  = age  ;
         this.sex  = sex  ;
         this.feature = feature;
+        this.id_num = id_num;
+        this.money = money;
     }
 
 
@@ -58,5 +62,21 @@ public class Face {
 
     public void setFeature(String feature) {
         this.feature = feature;
+    }
+
+    public String getId_num() {
+        return id_num;
+    }
+
+    public void setId_num(String id_num) {
+        this.id_num = id_num;
+    }
+
+    public Double getMoney() {
+        return money;
+    }
+
+    public void setMoney(Double money) {
+        this.money = money;
     }
 }

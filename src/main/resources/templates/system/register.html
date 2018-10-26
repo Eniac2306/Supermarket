@@ -5,6 +5,7 @@
     <title>会员注册</title>
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
     <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <link rel="stylesheet" href="css/bootstrap.css">
     <link href="jquery-ui-themes.css" type="text/css" rel="stylesheet"/>
     <link href="styles.css" type="text/css" rel="stylesheet"/>
     <link href="index/styles_2.css" type="text/css" rel="stylesheet"/>
@@ -42,7 +43,6 @@
             position: relative;
         }
     </style>
-    <link rel="stylesheet" href="css/bootstrap.css">
 </head>
 
 <body>
@@ -112,11 +112,17 @@
                                     </tr>
                                     <tr>
                                         <td>输入年龄:</td>
-                                        <td><input type="text" name="age" ></td>
-                                    <!--</tr>-->
-                                        <!--<th colspan="2">-->
-                                        <!--</th>-->
-                                    <!--</tr>-->
+                                        <td><input type="text" name=age ></td>
+                                    </tr>
+                                    <tr>
+                                        <td>输入卡号:</td>
+                                        <td><input type="text" name=id_num ></td>
+                                    </tr>
+                                    <tr>
+                                        <td>余额:</td>
+                                        <td><input type="text" name=money ></td>
+                                    </tr>
+
                                 </table>
                                 <input class="btn btn-primary btn-lg" type="submit" value="提交" id="submit">
                                 <input class="btn btn-link btn-lg" type="reset" value="重写">
