@@ -52,9 +52,9 @@ public class RegisterPageService {
         return "人像记录成功!请继续填写信息->";
     }
 
-    public void saveUserInfo(String name, String sex, Integer age, String id_num, Double money){
+    public void saveUserInfo(String name, String id_num, String psw){
 
-        faceRepository.insert(new Face(name,age,sex,id_num,money,result));
+        faceRepository.insert(new Face(name,id_num,psw,result));
         System.out.println(result);
     }
 }

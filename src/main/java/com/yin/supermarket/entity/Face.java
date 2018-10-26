@@ -1,31 +1,26 @@
 package com.yin.supermarket.entity;
 
-
 import org.springframework.data.annotation.Id;
 
 public class Face {
     private String name;
-    private Integer age;
-    private String sex;
     private String feature;
     private String id;
     private String id_num;
+    private String facePath;
+    private String psw;
     private Double money;
 
-
-    public Face(String name,int age,String sex, String id_num, double money,String feature){
-        this.name = name ;
-        this.age  = age  ;
-        this.sex  = sex  ;
+    public Face(String name, String id_num, String psw, String feature) {
+        this.name = name;
         this.feature = feature;
         this.id_num = id_num;
-        this.money = money;
+        this.psw = psw;
     }
-
 
     @Id
     public String getId() {
-        return id;
+        return this.id;
     }
 
     public void setId(String id) {
@@ -33,31 +28,15 @@ public class Face {
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
-    public Integer getAge() {
-        return age;
-    }
-
-    public void setAge(Integer age) {
-        this.age = age;
-    }
-
-    public String getSex() {
-        return sex;
-    }
-
-    public void setSex(String sex) {
-        this.sex = sex;
-    }
-
     public String getFeature() {
-        return feature;
+        return this.feature;
     }
 
     public void setFeature(String feature) {
@@ -65,7 +44,7 @@ public class Face {
     }
 
     public String getId_num() {
-        return id_num;
+        return this.id_num;
     }
 
     public void setId_num(String id_num) {
@@ -73,10 +52,26 @@ public class Face {
     }
 
     public Double getMoney() {
-        return money;
+        return this.money;
     }
 
     public void setMoney(Double money) {
         this.money = money;
+    }
+
+    public String getPsw() {
+        return this.psw;
+    }
+
+    public void setPsw(String psw) {
+        this.psw = psw;
+    }
+
+    public String getFacePath() {
+        return this.facePath;
+    }
+
+    public void setFacePath(String facePath) {
+        this.facePath = facePath;
     }
 }

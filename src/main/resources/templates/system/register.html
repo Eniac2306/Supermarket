@@ -9,7 +9,7 @@
     <link href="jquery-ui-themes.css" type="text/css" rel="stylesheet"/>
     <link href="styles.css" type="text/css" rel="stylesheet"/>
     <link href="index/styles_2.css" type="text/css" rel="stylesheet"/>
-    <script src="scripts/jquery-1.7.1.min.js"></script>
+    <script src="scripts/jquery-1.11.3.min.js"></script>
     <script src="scripts/jquery-ui-1.8.10.custom.min.js"></script>
     <script src="scripts/prototypePre.js"></script>
     <script src="document.js"></script>
@@ -27,11 +27,13 @@
             top: 0;
             /*width: 100%;*/
         }
+
         video {
-            width:581px;
-            height:436px;
-            background-color:rgba(255, 255, 255, 1);
+            width: 581px;
+            height: 436px;
+            background-color: rgba(255, 255, 255, 1);
         }
+
         .text-center {
             text-align: center;
         }
@@ -46,157 +48,192 @@
 </head>
 
 <body>
-    <div class="container-fluid" style="padding-top: 30px">
-        <div class="row">
-            <div class="col">
-                <h6>杉德无人超市自助结账系统</h6>
+<div class="bg-dark text-white" style="padding-top: 150px">
+    <div class="row">
+        <div class="col">
+            <div class="bg-dark text-white">
+                <h1>杉德无人超市自助结账系统</h1>
             </div>
-            <div class="col-6">
-                <h6>南京紫东创意园店</h6>
+        </div>
+        <div class="col-4">
+            <div class="bg-dark text-white">
+                <h1>南京紫东创意园店</h1>
             </div>
-            <div class="col">
-                <h6 id="time" style="color: black;"></h6>
+        </div>
+        <div class="col">
+            <div class="bg-dark text-white">
+                <h6 id="time" style="color: white;"></h6>
                 <script>
-                    function mytime(){
+                    function mytime() {
                         var a = new Date();
                         var b = a.toLocaleTimeString();
                         var c = a.toLocaleDateString();
-                        document.getElementById("time").innerHTML = c+"&nbsp"+b;
+                        document.getElementById("time").innerHTML = c + "&nbsp" + b;
                     }
-                    setInterval(function() {mytime()},1000);
+
+                    setInterval(function () {
+                        mytime()
+                    }, 1000);
                 </script>
             </div>
         </div>
-        <div class="row">
-            <div class="col-6">
-                <div class="card" style="padding-bottom: 30px;">
-                    <div id="face_video">
-                        <video id="video" preload autoplay loop muted></video>
-                        <canvas id="canvas" width="581" height="436"></canvas>
-                        <canvas id="shortCut" width="581" height="436"></canvas>
-                    </div>
-                    <div style="margin-top: 30px" class="text-center">
-                        <input class="btn btn-primary btn-lg" id="btn" type="button" value="拍照" onclick="getPhoto()" />
-                        <!--<a style="position: absolute; left: 0;" target="_blank" href="" id="saveTest">saveTest</a>-->
-                        <p th:text="${result}" ></p>
-                    </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <div class="bg-dark" style="padding-bottom: 30px;">
+                <div id="face_video">
+                    <video id="video" preload autoplay loop muted></video>
+                    <canvas id="canvas" width="581" height="436"></canvas>
+                    <canvas id="shortCut" width="581" height="436"></canvas>
                 </div>
-            </div>
-            <div class="col">
-                <div class="card">
-                    <div class="card-body">
-                        <form  action="/submit" method="post" id="user_form">
-                            <div class="text-center">
-                                <table class="table-striped" style="margin: 0 auto " >
-                                    <tr>
-                                        <th colspan="2">会员信息</th>
-                                    </tr>
-                                    <tr>
-                                        <td>输入姓名:</td>
-                                        <td><input type="text" name=name ></td>
-                                    </tr>
-                                    <tr>
-                                        <td>输入密码:</td>
-                                        <td><input type="password" name=psw></td>
-                                    </tr>
-                                    <tr>
-                                        <td>确认密码:</td>
-                                        <td><input type="password" name=repsw></td>
-                                    </tr>
-                                    <tr>
-                                        <td>选择性别:</td>
-                                        <td>
-                                            <input type="radio" name="sex" value=男 checked="checked">男
-                                            <input type="radio" name="sex" value=女>女
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>输入年龄:</td>
-                                        <td><input type="text" name=age ></td>
-                                    </tr>
-                                    <tr>
-                                        <td>输入卡号:</td>
-                                        <td><input type="text" name=id_num ></td>
-                                    </tr>
-                                    <tr>
-                                        <td>余额:</td>
-                                        <td><input type="text" name=money ></td>
-                                    </tr>
-
-                                </table>
-                                <input class="btn btn-primary btn-lg" type="submit" value="提交" id="submit">
-                                <input class="btn btn-link btn-lg" type="reset" value="重写">
-                            </div>
-                        </form>
-                    </div>
+                <div style="margin-top: 30px" class="text-center">
+                    <input class="btn btn-primary btn-lg" id="btn" type="button" value="拍照" onclick="getPhoto()"/>
+                    <!--<a style="position: absolute; left: 0;" target="_blank" href="" id="saveTest">saveTest</a>-->
+                    <p th:text="${result}"></p>
                 </div>
             </div>
         </div>
+        <div class="col-4">
+            <div class="bg-dark text-white">
+                <form action="/submit" method="post" id="user_form" class="form-horizontal" role="form">
+                    <div class="form-group">
+
+                        <label for="name" class="col-sm-2 control-label">名字</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="name" name="name"
+                                   placeholder="请输入名字">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="id_num" class="col-sm-2 control-label">卡号</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="id_num" name="id_num"
+                                   placeholder="请输卡号">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="psw" class="col-sm-2 control-label">密码</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="psw"
+                                   placeholder="请输密码">
+                        </div>
+                    </div>
+
+
+                        <!--<table class="table table-hover">-->
+                            <!--<caption>-->
+                                <!--<div class="text-right">-->
+                                <!--紫金创意园店-->
+                                <!--</div>-->
+                            <!--</caption>-->
+                            <!--<thead>-->
+                                <!--<h2>录入会员信息</h2>-->
+                            <!--</thead>-->
+                            <!--<tbody>-->
+                                <!--<tr class="active">-->
+                                    <!--<td>输入姓名:</td>-->
+                                    <!--<td><input type="text" name=name style="background: #0c5460"></td>-->
+                                <!--</tr>-->
+                                <!--<tr class="success">-->
+                                    <!--<td>输入密码:</td>-->
+                                    <!--<td><input type="password" name=psw style="background: black"></td>-->
+                                <!--</tr>-->
+                                <!--<tr class="warning">-->
+                                    <!--<td>选择性别:</td>-->
+                                    <!--<td>-->
+                                        <!--<input type="radio" name="sex" value=男 checked="checked">男-->
+                                        <!--<input type="radio" name="sex" value=女>女-->
+                                    <!--</td>-->
+                                <!--</tr>-->
+                                <!--<tr>-->
+                                    <!--<td class="danger">输入年龄:</td>-->
+                                    <!--<td><input type="text" name=age style="background: black"></td>-->
+                                <!--</tr>-->
+                                <!--<tr class="active">-->
+                                    <!--<td>输入卡号:</td>-->
+                                    <!--<td><input type="text" name=id_num style="background: black"></td>-->
+                                <!--</tr>-->
+                                <!--<tr>-->
+                                    <!--<td class="success">余额:</td>-->
+                                    <!--<td><input type="text" name=money style="background: black"></td>-->
+                                <!--</tr>-->
+                            <!--</tbody>-->
+                        <!--</table>-->
+                    <div class="text-center">
+                        <input class="btn btn-primary btn-lg" type="submit" value="提交" id="submit">
+                        <input class="btn btn-link btn-lg" type="reset" value="重写">
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
-    <div id="u0" class="" data-left="33" data-top="222" data-width="1768" data-height="908">
-        <form action="/facesubmit" method="post" id="face_form">
-            <input type=hidden id="faceInfo" name="faceInfo" value="">
-        </form>
-    </div>
+</div>
+<div id="u0" class="" data-left="33" data-top="222" data-width="1768" data-height="908">
+    <form action="/facesubmit" method="post" id="face_form">
+        <input type=hidden id="faceInfo" name="faceInfo" value="">
+    </form>
+</div>
 
-    <script type="text/javascript">
-        var saveArray = {};
-        var video = document.getElementById('video');
-        var faceLine = document.getElementById('canvas');
-        var context = faceLine.getContext('2d');
-        var shortcut = document.getElementById('shortCut');
-        var context2 = shortcut.getContext('2d');
+<script type="text/javascript">
+    var saveArray = {};
+    var video = document.getElementById('video');
+    var faceLine = document.getElementById('canvas');
+    var context = faceLine.getContext('2d');
+    var shortcut = document.getElementById('shortCut');
+    var context2 = shortcut.getContext('2d');
 
-        window.onload = function () {
-            var tracker = new tracking.ObjectTracker('face');
-            tracker.setInitialScale(4);
-            tracker.setStepSize(2);
-            tracker.setEdgesDensity(0.1);
+    window.onload = function () {
+        var tracker = new tracking.ObjectTracker('face');
+        tracker.setInitialScale(4);
+        tracker.setStepSize(2);
+        tracker.setEdgesDensity(0.1);
 
-            tracking.track('#video', tracker, {camera: true});
+        tracking.track('#video', tracker, {camera: true});
 
-            tracker.on('track', function (event) {
-                context.clearRect(0, 0, faceLine.width, faceLine.height);
+        tracker.on('track', function (event) {
+            context.clearRect(0, 0, faceLine.width, faceLine.height);
 
-                event.data.forEach(function (rect) {
-                    context.strokeStyle = '#bfaeff';
-                    context.strokeRect(rect.x, rect.y, rect.width, rect.height);
-                    context.font = '11px Helvetica';
-                    context.fillStyle = "#ff918b";
-                    context.fillText('x: ' + rect.x + 'px', rect.x + rect.width + 5, rect.y + 11);
-                    context.fillText('y: ' + rect.y + 'px', rect.x + rect.width + 5, rect.y + 22);
-                    console.log(rect.x, rect.width, rect.y, rect.height);
-                    saveArray.x = rect.x;
-                    saveArray.y = rect.y;
-                    saveArray.width = rect.width;
-                    saveArray.height = rect.height;
-                });
+            event.data.forEach(function (rect) {
+                context.strokeStyle = '#bfaeff';
+                context.strokeRect(rect.x, rect.y, rect.width, rect.height);
+                context.font = '11px Helvetica';
+                context.fillStyle = "#ff918b";
+                context.fillText('x: ' + rect.x + 'px', rect.x + rect.width + 5, rect.y + 11);
+                context.fillText('y: ' + rect.y + 'px', rect.x + rect.width + 5, rect.y + 22);
+                console.log(rect.x, rect.width, rect.y, rect.height);
+                saveArray.x = rect.x;
+                saveArray.y = rect.y;
+                saveArray.width = rect.width;
+                saveArray.height = rect.height;
             });
-        }
+        });
+    }
 
-        function getPhoto() {
-            context2.drawImage(video, 0, 0, 581, 436); //将video对象内指定的区域捕捉绘制到画布上指定的区域，实现拍照。
-            //var img = convertCanvasToImage(video);
-            Download();
-        }
-        var saveTest = document.getElementById('saveTest')
-        saveTest.addEventListener('click', function (ev) {
-            saveTest.href = document.getElementById("shortCut").toDataURL()
-            // saveTest.download = 'a.png'
-        }, false)
+    function getPhoto() {
+        context2.drawImage(video, 0, 0, 581, 436); //将video对象内指定的区域捕捉绘制到画布上指定的区域，实现拍照。
+        //var img = convertCanvasToImage(video);
+        Download();
+    }
 
-        function Download() {
-            var type = 'jpg';
-            var d = document.getElementById("shortCut");
-            var imgdata = d.toDataURL(type);
-            var imgDataInput = document.getElementById("faceInfo");
-            imgDataInput.value = imgdata;
-            // alert(imgDataInput.value);
-            var form = document.getElementById("face_form");
-            form.submit();
-        }
+    var saveTest = document.getElementById('saveTest')
+    saveTest.addEventListener('click', function (ev) {
+        saveTest.href = document.getElementById("shortCut").toDataURL()
+        // saveTest.download = 'a.png'
+    }, false)
 
-    </script>
+    function Download() {
+        var type = 'jpg';
+        var d = document.getElementById("shortCut");
+        var imgdata = d.toDataURL(type);
+        var imgDataInput = document.getElementById("faceInfo");
+        imgDataInput.value = imgdata;
+        // alert(imgDataInput.value);
+        var form = document.getElementById("face_form");
+        form.submit();
+    }
+
+</script>
 </body>
 </html>
 
