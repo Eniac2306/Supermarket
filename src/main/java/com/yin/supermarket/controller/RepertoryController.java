@@ -1,7 +1,7 @@
 package com.yin.supermarket.controller;
 
 import com.yin.supermarket.entity.Face;
-import com.yin.supermarket.service.FaceRepertoryService;
+import com.yin.supermarket.service.RepertoryService;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -11,8 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.File;
 import java.io.IOException;
@@ -22,11 +20,11 @@ import java.util.List;
 public class RepertoryController {
 
     @Autowired
-    FaceRepertoryService faceRepertoryService;
+    RepertoryService repertoryService;
 
     @GetMapping("/repertory")
     public String getPage(Model model) {
-        List<Face> allFace = faceRepertoryService.getAllFace();
+        List<Face> allFace = repertoryService.getAllFace();
         model.addAttribute("list", allFace);
         return "system/facerepertory";
     }
@@ -47,4 +45,11 @@ public class RepertoryController {
         model.addAttribute("path", path);
         return "system/test";
     }
+
+//    @PostMapping("/submit")
+//    public String selectFace(String name_or_id_num,Model model){
+//        List<Face> selectedFaces = repertoryService.selectedFace(name_or_id_num);
+//        model.addAttribute("list",selectedFaces);
+//        return "system/facerepertory";
+//    }
 }

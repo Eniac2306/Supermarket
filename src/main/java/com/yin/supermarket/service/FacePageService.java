@@ -1,13 +1,14 @@
 package com.yin.supermarket.service;
 
+
 import com.yin.supermarket.dao.IFaceRepository;
 import com.yin.supermarket.entity.Face;
+import org.bson.internal.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestTemplate;
-import sun.misc.BASE64Decoder;
 
 import java.io.FileOutputStream;
 import java.io.OutputStream;
@@ -28,10 +29,9 @@ public class FacePageService {
     public boolean GenerateImage(String imgStr, String imgFilePath) {
         if (imgStr == null) //图像数据为空
             return false;
-        BASE64Decoder decoder = new BASE64Decoder();
         try {
             //Base64解码
-            byte[] b = decoder.decodeBuffer(imgStr);
+            byte[] b = Base64.decode(imgStr);
             for (int i = 0; i < b.length; ++i) {
                 if (b[i] < 0) {//调整异常数据
                     b[i] += 256;
