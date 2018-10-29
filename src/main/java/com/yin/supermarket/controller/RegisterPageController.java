@@ -24,10 +24,10 @@ public class RegisterPageController extends HttpServlet {
     }
 
     @PostMapping("/submit")
-    public String submit(String name, String id_num, String psw, Model model) {
+    public String submit(String name, String cardNum, String psw, Model model) {
 
         try {
-            registerPageService.saveUserInfo(name,id_num,psw,time);
+            registerPageService.saveUserInfo(name,cardNum,psw,time);
         }catch (Exception e){
             return "system/register";
         }

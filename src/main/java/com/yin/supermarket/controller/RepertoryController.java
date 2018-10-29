@@ -46,10 +46,10 @@ public class RepertoryController {
         return "system/test";
     }
 
-//    @PostMapping("/submit")
-//    public String selectFace(String name_or_id_num,Model model){
-//        List<Face> selectedFaces = repertoryService.selectedFace(name_or_id_num);
-//        model.addAttribute("list",selectedFaces);
-//        return "system/facerepertory";
-//    }
+    @GetMapping("/select")
+    public String selectFace(String name_or_id_num,Model model){
+        List<Face> selectedFaces = repertoryService.selectedFace(name_or_id_num);
+        model.addAttribute("list",selectedFaces);
+        return "system/facerepertory";
+    }
 }

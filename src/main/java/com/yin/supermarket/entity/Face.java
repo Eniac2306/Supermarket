@@ -7,15 +7,15 @@ public class Face {
     private String id;
     private String name;
     private String feature;
-    private String id_num;
+    private String cardNum;
     private String filename;
     private String psw;
     private Double money;
 
-    public Face(String name, String id_num, String psw, String feature,String filename) {
+    public Face(String name, String cardNum, String psw, String feature,String filename) {
         this.name = name;
         this.feature = feature;
-        this.id_num = id_num;
+        this.cardNum = cardNum;
         this.psw = psw;
         this.filename = filename;
     }
@@ -44,12 +44,12 @@ public class Face {
         this.feature = feature;
     }
 
-    public String getId_num() {
-        return this.id_num;
+    public String getCardNum() {
+        return this.cardNum;
     }
 
-    public void setId_num(String id_num) {
-        this.id_num = id_num;
+    public void setCardNum(String cardNum) {
+        this.cardNum = cardNum;
     }
 
     public Double getMoney() {

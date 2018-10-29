@@ -16,14 +16,14 @@ public class RepertoryService {
         return iFaceRepository.findAll();
     }
 
-//    public List<Face> selectedFace(String name_or_id_num) {
-//        if (iFaceRepository.findByName(name_or_id_num) != null) {
-//            return iFaceRepository.findByName(name_or_id_num);
-//        } else if (iFaceRepository.findById_num(name_or_id_num) != null) {
-//            return iFaceRepository.findById_num(name_or_id_num);
-//        } else {
-//            return null;
-//        }
-//    }
+    public List<Face> selectedFace(String name_or_id_num) {
+        if (iFaceRepository.findByName(name_or_id_num) != null) {
+            return iFaceRepository.findByName(name_or_id_num);
+        } else if (iFaceRepository.findByCardNum(name_or_id_num) != null) {
+            return iFaceRepository.findByCardNum(name_or_id_num);
+        } else {
+            return null;
+        }
+    }
 
 }
