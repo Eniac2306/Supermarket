@@ -9,6 +9,6 @@ public interface IFaceRepository extends MongoRepository<Face,String> {
 
    List<Face> findByName(String name);
 
-   List<Face> findByCardNum(String cardNum);
+   List<Face> findByCard(String card);
 
 }

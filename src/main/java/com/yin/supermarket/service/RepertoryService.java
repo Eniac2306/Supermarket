@@ -17,13 +17,11 @@ public class RepertoryService {
     }
 
     public List<Face> selectedFace(String name_or_id_num) {
-        if (iFaceRepository.findByName(name_or_id_num) != null) {
+        if (iFaceRepository.findByName(name_or_id_num).size()>0) {
             return iFaceRepository.findByName(name_or_id_num);
-        } else if (iFaceRepository.findByCardNum(name_or_id_num) != null) {
-            return iFaceRepository.findByCardNum(name_or_id_num);
-        } else {
-            return null;
-        }
+        } else
+            System.out.println(iFaceRepository.findByCard(name_or_id_num));
+            return iFaceRepository.findByCard(name_or_id_num);
     }
 
 }

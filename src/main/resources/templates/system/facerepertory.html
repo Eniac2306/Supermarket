@@ -65,7 +65,7 @@
             <form action="/select">
                 <div class="input-group mt-3 mb-3">
                     <input type="text" class="form-control" placeholder="输入姓名或卡号" id="name_or_id_num" name="name_or_id_num">
-                    <input class="btn btn-primary btn-lg" type="submit" value="搜索">
+                    <input class="btn btn-primary" type="submit" value="搜索">
                 </div>
             </form>
         </div>
@@ -83,7 +83,7 @@
             </thead>
             <tbody th:each="face : ${list}">
             <td th:text="${face.getName()}"></td>
-            <td th:text="${face.getCardNum()}"></td>
+            <td th:text="${face.getCard()}"></td>
             <td th:text="${face.getMoney()}"></td>
             <td>
                 <button class="btn btn-link" th:value="${face.getFilename()}" onclick="getImg(this.value)">
