@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="css/bootstrap.css">
     <link href="jquery-ui-themes.css" type="text/css" rel="stylesheet"/>
     <link href="index/styles_2.css" type="text/css" rel="stylesheet"/>
+    <link rel="stylesheet" href="css/bootstrap-table.css" />
     <script src="scripts/jquery-1.11.3.min.js"></script>
     <script src="js/bootstrap.bundle.js"></script>
     <script src="scripts/jquery-ui-1.8.10.custom.min.js"></script>
@@ -15,6 +16,7 @@
     <script src="document.js"></script>
     <script src="scripts/prototypePost.js"></script>
     <script src="index/data.js"></script>
+    <script type="text/javascript" src="js/bootstrap-table.js"></script>
     <script type="text/javascript"></script>
     <style>
         .text-center {
@@ -59,20 +61,21 @@
             </div>
         </div>
     </div>
-    <div class="row" style="padding-top: 200px">
-        <div class="col-8"></div>
-        <div class="col-3">
-            <form action="/select">
-                <div class="input-group mt-3 mb-3">
-                    <input type="text" class="form-control" placeholder="输入姓名或卡号" id="name_or_id_num" name="name_or_id_num">
-                    <input class="btn btn-primary" type="submit" value="搜索">
-                </div>
-            </form>
-        </div>
-    </div>
+    <!--<div class="row" style="padding-top: 200px">-->
+        <!--<div class="col-8"></div>-->
+        <!--<div class="col-3">-->
+            <!--<form action="/select">-->
+                <!--<div class="input-group mt-3 mb-3">-->
+                    <!--<input type="text" class="form-control" placeholder="输入姓名或卡号" id="name_or_id_num"-->
+                           <!--name="name_or_id_num">-->
+                    <!--<input class="btn btn-primary" type="submit" value="搜索">-->
+                <!--</div>-->
+            <!--</form>-->
+        <!--</div>-->
+    <!--</div>-->
     <div class="container">
         <h2>人像库</h2>
-        <table class="table table-hover">
+        <table class="table table-hover" id="table_page" style="border-color: #2F4056">
             <thead>
             <tr>
                 <th>姓名</th>
@@ -94,25 +97,6 @@
         </table>
     </div>
 </div>
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
-                <!--<span aria-hidden="true">&times;</span>-->
-                <!--</button>-->
-            </div>
-            <div class="modal-body">
-                <h2>支付成功！</h2>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
-            </div>
-        </div>
-    </div>
-</div>
 </body>
 <script type="text/javascript">
 
@@ -122,6 +106,18 @@
             'height=436, width=581, top=300 , left=800, toolbar=no, menubar=no, scrollbars=no, resizable=no,location=n o, status=no')
 
     }
+
+    $(document).ready(function () {
+        $("#table_page").bootstrapTable({
+            search:true,
+            pageSize: 5,
+            pageList: 10,
+            pagination: true,
+            striped: false,
+            border:false,
+            clickToSelect: true,
+        });
+    })
 
 </script>
 </body>
