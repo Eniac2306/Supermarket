@@ -77,7 +77,7 @@ public class FacePageService {
                 temp += v * v;
             }
             temp = Math.sqrt(temp);
-            if (temp < 0.85 && temp < min) {
+            if (temp < 0.9 && temp < min) {
                 min = temp;
 //                name = face.getName();
                 userFace = face;

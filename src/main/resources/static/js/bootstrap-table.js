@@ -307,7 +307,7 @@
     paginationDetailHAlign: 'left', // right, left
     paginationPreText: '&lsaquo;',
     paginationNextText: '&rsaquo;',
-    search: false,
+    search: true,
     searchOnEnterKey: false,
     strictSearch: false,
     searchAlign: 'right',

@@ -24,4 +24,7 @@ public class RepertoryService {
             return iFaceRepository.findByCard(name_or_id_num);
     }
 
+    public void deleteFace(String id) {
+        iFaceRepository.deleteByCard(id);
+    }
 }

@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.io.File;
 import java.io.IOException;
@@ -50,6 +51,15 @@ public class RepertoryController {
     public String selectFace(String name_or_id_num,Model model){
         List<Face> selectedFaces = repertoryService.selectedFace(name_or_id_num);
         model.addAttribute("list",selectedFaces);
+        return "system/facerepertory";
+    }
+
+    @PostMapping("/delete")
+    public String deleteFace(String id,Model model){
+        System.out.println(id);
+        repertoryService.deleteFace(id);
+        List<Face> allFace = repertoryService.getAllFace();
+        model.addAttribute("list", allFace);
         return "system/facerepertory";
     }
 }

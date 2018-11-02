@@ -11,4 +11,5 @@ public interface IFaceRepository extends MongoRepository<Face,String> {
 
    List<Face> findByCard(String card);
 
+   void deleteByCard(String card);
 }
