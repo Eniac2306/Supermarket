@@ -57,4 +57,8 @@ public class RegisterPageService {
         faceRepository.save(new Face(name,card,psw,result,filename+".jpg"));
         System.out.println(result);
     }
+
+    public void deleteFace(String id ){
+        faceRepository.deleteByCard(id);
+    }
 }

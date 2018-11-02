@@ -44,6 +44,7 @@
             margin: 0 auto;
             position: relative;
         }
+
         body {
             background-color: #343a40;
         }
@@ -54,10 +55,12 @@
             left: 45%;
             z-index: 3;
         }
-        .table{
+
+        .table {
             height: 450px;
 
         }
+
         .bg-dark {
             /*max-width: 1366px;*/
             margin: auto 30px;
@@ -211,27 +214,60 @@
                     </div>
                 </div>
             </div>
-            <div style="margin-top: 30px" class="text-right">
-                <input class="btn btn-link btn-lg" id="" type="button" value="注册" onclick="register()"/>
+            <div style="margin-top: 30px">
+                <div class="row">
+                    <div class="col-4"></div>
+                    <div class="col-4">
+                        <div class="text-center">
+                            <input class="btn btn-link" type="button" value="注册" onclick="register()"/>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="text-right">
+                            <button class="btn btn-link" data-toggle="modal" data-target="#deleteAndRegisterModal">
+                                重新注册人像信息
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
-                    <!--<span aria-hidden="true">&times;</span>-->
+                <!--<span aria-hidden="true">&times;</span>-->
                 <!--</button>-->
             </div>
             <div class="modal-body">
                 <h2>支付成功！</h2>
             </div>
             <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="deleteAndRegisterModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+                <!--<span aria-hidden="true">&times;</span>-->
+                <!--</button>-->
+            </div>
+            <div class="modal-body">
+                <h2>确认重新录入人脸信息吗？</h2>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" data-dismiss="modal" th:value="${vip_id}" onclick="deleteAndRegister(this.value)">确认</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
             </div>
         </div>
@@ -244,6 +280,9 @@
     </form>
     <form action="/register" method="get" id="register_form">
         <input type=hidden id="register" name="register">
+    </form>
+    <form action="/deleteAndRegister" method="get" id="deleteAndRegister_form">
+        <input type=hidden id="deleteAndRegister" name="deleteAndRegister" value="">
     </form>
 </div>
 <script type="text/javascript">
@@ -309,6 +348,13 @@
 
     function register() {
         var form = document.getElementById("register_form");
+        form.submit();
+    }
+    
+    function deleteAndRegister(value) {
+        var userid = document.getElementById("deleteAndRegister");
+        userid.value = value;
+        var form = document.getElementById("deleteAndRegister_form");
         form.submit();
     }
 

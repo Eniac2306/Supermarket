@@ -27,8 +27,8 @@ public class RegisterPageController extends HttpServlet {
     public String submit(String name, String card, String psw, Model model) {
 
         try {
-            registerPageService.saveUserInfo(name,card,psw,time);
-        }catch (Exception e){
+            registerPageService.saveUserInfo(name, card, psw, time);
+        } catch (Exception e) {
             return "system/register";
         }
         model.addAttribute("vip_name", "再试试？");
@@ -49,5 +49,17 @@ public class RegisterPageController extends HttpServlet {
         String result = registerPageService.readFaceInfo(imgTime);
         model.addAttribute("result", result);
         return "system/register";
+    }
+
+    @GetMapping("/deleteAndRegister")
+    public String deleteAndRegisterFace(String deleteAndRegister,Model model) {
+//        System.out.println(deleteAndRegister);
+        if (deleteAndRegister == "") {
+            model.addAttribute("vip_name", "请先识别");
+            return "system/facePage";
+        }else {
+            registerPageService.deleteFace(deleteAndRegister);
+            return "system/register";
+        }
     }
 }
